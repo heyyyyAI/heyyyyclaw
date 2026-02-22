@@ -51,7 +51,8 @@ RUN pnpm ui:build
 
 ENV NODE_ENV=production
 
-# Install Claude Code CLI
+# Install Claude Code CLI (needs root for global install)
+USER root
 RUN npm install -g @anthropic-ai/claude-code@latest
 
 # Security hardening: Run as non-root user
