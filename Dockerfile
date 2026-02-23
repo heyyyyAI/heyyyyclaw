@@ -55,6 +55,8 @@ ENV NODE_ENV=production
 USER node
 RUN curl -fsSL https://claude.ai/install.sh | bash
 ENV PATH="/home/node/.local/bin:${PATH}"
+RUN printf '#!/bin/sh\nexec node /app/openclaw.mjs "$@"\n' > /home/node/.local/bin/openclaw \
+    && chmod +x /home/node/.local/bin/openclaw
 
 # Start gateway server with default config.
 # Binds to loopback (127.0.0.1) by default for security.
