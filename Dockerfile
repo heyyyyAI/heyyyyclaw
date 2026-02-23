@@ -51,9 +51,9 @@ RUN pnpm ui:build
 
 ENV NODE_ENV=production
 
-# Install Claude Code CLI (needs root for global install)
+# Install Claude Code CLI via native installer
 USER root
-RUN npm install -g @anthropic-ai/claude-code@latest
+RUN curl -fsSL https://claude.ai/install.sh | bash
 
 # Security hardening: Run as non-root user
 # The node:22-bookworm image includes a 'node' user (uid 1000)
