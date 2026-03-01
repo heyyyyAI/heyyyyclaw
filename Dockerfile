@@ -60,13 +60,10 @@ ENV NODE_ENV=production
 USER node
 RUN curl -fsSL https://claude.ai/install.sh | bash
 ENV PATH="/home/node/.local/bin:${PATH}"
-RUN printf '#!/bin/sh\nexec node /app/openclaw.mjs "$@"\n' > /home/node/.local/bin/openclaw \
-    && chmod +x /home/node/.local/bin/openclaw
-
 # Start gateway server with default config.
 # Binds to loopback (127.0.0.1) by default for security.
 #
 # For container platforms requiring external health checks:
 #   1. Set OPENCLAW_GATEWAY_TOKEN or OPENCLAW_GATEWAY_PASSWORD env var
 #   2. Override CMD: ["node","openclaw.mjs","gateway","--allow-unconfigured","--bind","lan"]
-CMD ["sh", "-c", "node openclaw.mjs gateway --allow-unconfigured --bind lan --port ${PORT:-8080}"]
+CMD ["/app/entrypoint.sh"]
