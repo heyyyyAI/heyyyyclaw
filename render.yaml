@@ -3,6 +3,7 @@ services:
     name: openclaw
     runtime: docker
     plan: standard
+    dockerCommand: /app/entrypoint.sh
     healthCheckPath: /health
     envVars:
       - key: OPENCLAW_GATEWAY_PORT
